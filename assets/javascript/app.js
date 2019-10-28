@@ -22,10 +22,7 @@ $(document).ready(function(){
     function stop() {
         clearInterval(countdown);
     }
-    $("#myForm").on('click', function () {
-        var value = $("[name=radio]:checked").val();
-        alert(value);
-    })
+    
     $("#button").on("click", function() {
         for(var i = 1; i <= 45; i++) {
             var radios = document.getElementsByName("question" + i);
