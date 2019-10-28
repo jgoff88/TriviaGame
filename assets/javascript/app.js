@@ -3,16 +3,25 @@ var userChoice = "";
 var correctChoice = true;
 var amountCorrect = 0;
 var amountIncorrect = 0;
+var countdown;
 $(document).ready(function(){
     setInterval(function timer (){
         if (countdown > 0) {
             countdown --;
             $("#timer").text(countdown);
         } else {
-            //alert("Time is up!");
-            clearInterval(countdown)
+            alert("Time is up!");
+            var card = $(".card");
+            var displayCorrect = "Correct amount: " + amountCorrect;
+            var displayIncorrect = "Incorrect amount: " + amountIncorrect;
+            card.append("<div><h3>" + displayCorrect + "</h3></div>");
+            card.append("<div><h3>" + displayIncorrect + "</h3></div>");
+            stop();
         }
     }, 1000)
+    function stop() {
+        clearInterval(countdown);
+    }
     $("#myForm").on('click', function () {
         var value = $("[name=radio]:checked").val();
         alert(value);
