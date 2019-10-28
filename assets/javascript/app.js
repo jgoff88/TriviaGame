@@ -1,8 +1,8 @@
 var countdown = 30;
-var newQuestion = "";
+var userChoice = "";
 var correctChoice = true;
-var right = "That is Correct!"
-var wrong = "That is Inccorrect!"
+var amountCorrect = 0;
+var amountIncorrect = 0;
 $(document).ready(function(){
     setInterval(function timer (){
         if (countdown > 0) {
@@ -12,17 +12,31 @@ $(document).ready(function(){
             //alert("Time is up!");
             clearInterval(countdown)
         }
-    }, 1000);
-    $(".custom-control custom-radio custom-control-inline").on("click", function() {
-        var choice = $(this).attr("answer1"); 
-        console.log(choice);
-        
-    });
-    $("btn btn-primary").on("click", function() {
-        if (correctChoice) {
-            $(".card").text(right);
-        } else {
-            $(".card").text(wrong);
+    }, 1000)
+    $("#myForm").on('click', function () {
+        var value = $("[name=radio]:checked").val();
+        alert(value);
+    })
+    $("#button").on("click", function() {
+        for(var i = 1; i <= 45; i++) {
+            var radios = document.getElementsByName("question" + i);
+            for(var j = 0; j < radios.length; j++) {
+                var radio = radios[j];
+                if(radio.value === "correct" && radio.checked) {
+                    amountCorrect++;
+                
+                } else if (radio.value === "wrong" && radio.checked) {
+                    amountIncorrect++;
+                }
+            }
         }
+        var card = $(".card");
+        var displayCorrect = "Correct amount: " + amountCorrect;
+        var displayIncorrect = "Incorrect amount: " + amountIncorrect;
+        //console.log("YOU GOT " + amountCorrect + " CORRECT!")
+        //console.log("YOU GOT " + amountIncorrect + " CORRECT!")
+        card.append("<div><h3>" + displayCorrect + "</h3></div>");
+        card.append("<div><h3>" + displayIncorrect + "</h3></div>");
     });
+
 });
